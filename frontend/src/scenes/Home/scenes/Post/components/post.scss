@@ -10,7 +10,19 @@
   color: #02d8ff;
   display: flex !important;
   flex-flow: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
   padding: 5px 10px;
+}
+
+.post__card-cover i {
+  font-size: 1.2em;
+  padding: 5px;
+  border: 1px solid;
+  margin: 2px;
+  border-radius: 3px;
+}
+
+.post__card-cover i:hover {
+  cursor: pointer;
 }
