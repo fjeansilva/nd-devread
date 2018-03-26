@@ -2,13 +2,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import DetailPost from './scenes/Home/scenes/Post/scenes/Details';
+import App from './scenes/App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 ReactDOM.render(
   <BrowserRouter>
-    <DetailPost />
+    <App />
   </BrowserRouter>,
   document.getElementById('root'),
 );
