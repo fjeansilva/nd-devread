@@ -1,0 +1,27 @@
+.nav__menu {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  list-style-type: none;
+  margin: 10px 0;
+}
+
+.nav__menu li {
+  padding: 0 10px;
+}
+
+.menu__item {
+  font-size: 0.8em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #b3b3b3;
+}
+
+.menu__item--active {
+  color: #6e6e6e;
+}
+
+@media screen and (max-width: 420px) {
+  
+}

@@ -1,0 +1,27 @@
+.top__bar {
+  height: 80px;
+  padding: 10px;
+  display: -ms-flexbox;
+  display: flex;
+  flex-flow: row wrap;
+  flex-grow: 0;
+  align-items: center;
+  border-bottom: 1px solid #e4e4e4; }
+  .top__bar .project__logo {
+    align-items: center;
+    text-decoration: none;
+    display: inherit;
+    color: inherit; }
+  .top__bar .project__name {
+    display: block;
+    margin: 10px;
+    font-weight: bold; }
+  @media screen and (max-width: 420px) {
+    .top__bar {
+      justify-content: center; }
+      .top__bar .project__logo {
+        flex-flow: column nowrap;
+        justify-content: inherit;
+        align-items: inherit; }
+      .top__bar .project__name {
+        margin: 5px 0 0 0; } }

@@ -1,0 +1,26 @@
+.post__category {
+  margin: 10px 0;
+  color: #46d8b8;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.post__info {
+  color: #b9b9b9;
+  font-size: 0.8em;
+}
+
+.username {
+  color: #78b2f7;
+}
+
+.group__actions {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  list-style-type: none;
+}
+
+.group__actions li {
+  margin: 6px;
+}

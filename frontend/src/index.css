@@ -1,0 +1,14 @@
+@import url(~antd/dist/antd.css);
+html, body {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: Raleway, sans-serif;
+  background-color: #fff;
+  color: #666;
+  font-size: 1em;
+  line-height: 1em; }
+
+.ant-layout {
+  background-color: #fff; }

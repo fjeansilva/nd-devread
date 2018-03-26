@@ -1,0 +1,16 @@
+.posts .ant-card {
+  margin: 15px;
+}
+
+.post__card-cover {
+  background: url(https://img4.goodfon.ru/wallpaper/big/5/a5/react-framework-logo.jpg);
+  background-size: contain;
+  background-position: center;
+  height: 212px;
+  color: #02d8ff;
+  display: flex !important;
+  flex-flow: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 5px 10px;
+}
