@@ -4,9 +4,10 @@ import MenuBar from '../../components/MenuBar';
 import Footer from '../../components/Footer';
 import CategoryBar from './scenes/Category/components/CategoryBar';
 import ListPosts from './scenes/Post';
+import './index.css';
 
 const Home = () => (
-  <div>
+  <div className="home">
     <Header />
     <MenuBar />
     <CategoryBar />
