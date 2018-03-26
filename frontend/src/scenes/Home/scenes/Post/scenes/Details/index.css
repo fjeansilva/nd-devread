@@ -1,3 +1,11 @@
+@media screen and (max-width: 420px) {
+  .post__details {
+    margin: 0 15px; } }
+
+@media screen and (max-width: 768px) {
+  .post__details {
+    margin: 0 15px; } }
+
 .post__category {
   margin: 10px 0;
   color: #46d8b8;
@@ -14,8 +22,8 @@
 .group__actions {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-end;
-  list-style-type: none; }
+  list-style-type: none;
+  padding: 0; }
 
 .group__actions li {
   margin: 6px; }

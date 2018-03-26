@@ -1,3 +1,13 @@
+.post__details {
+  @media screen and (max-width: 420px) {
+    margin: 0 15px;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin: 0 15px;
+  }
+}
+
 .post__category {
   margin: 10px 0;
   color: #46d8b8;
@@ -17,8 +27,8 @@
 .group__actions {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: flex-end;
   list-style-type: none;
+  padding: 0;
 }
 
 .group__actions li {

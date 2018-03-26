@@ -12,3 +12,7 @@ body {
 
 .ant-layout {
   background-color: #fff; }
+
+#root {
+  max-width: 1010px;
+  margin: 0 auto; }
