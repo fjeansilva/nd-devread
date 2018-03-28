@@ -1,24 +1,29 @@
-import React from 'react';
-import Card from './components/Card';
-import './index.css';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchPosts } from './data/posts/actions';
+import PostList from './components/PostList';
 
-const postInfo = {
-  id: '1',
-  title: 'React and Redux are awesome',
-  body: 'Not everything can be a component, and you will need to create independent modules that can be used by your components or scenes.',
-  totalComments: 459,
-  totalVotes: 33,
-};
+class PostContainer extends Component {
+  componentDidMount() {
+    this.props.getPosts();
+  }
+  
+  render(){
+    const { recentPosts } = this.props;
+    if (!recentPosts) return <span>Loading...</span>;
+    return (
+      <PostList items={recentPosts} />
+    );
+  }
+}
 
-const listOfPosts = () => {
-  const posts = [1, 2, 3, 4, 5, 6];
-  return posts.map(p => <Card key={p} {...postInfo} />);
-};
+const mapStateToProps = (state) => ({
+  recentPosts: Object.values(state.Home.scenes.Post.data.posts).length > 0 ? Object.values(state.Home.scenes.Post.data.posts) : null,
+});
 
-const ListPosts = () => (
-  <section className="posts">
-    {listOfPosts()}
-  </section>
-);
+const mapDispatchToProps = dispatch => ({
+  getPosts: () => dispatch(fetchPosts()),
+});
 
-export default ListPosts;
+export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);
+// export default PostContainer;

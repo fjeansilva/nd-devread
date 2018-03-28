@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import MenuBar from '../../components/MenuBar';
 import Footer from '../../components/Footer';
 import CategoryBar from './scenes/Category/components/CategoryBar';
-import ListPosts from './scenes/Post';
+import PostContainer from './scenes/Post';
 import './index.css';
 
 const Home = () => (
@@ -11,7 +11,7 @@ const Home = () => (
     <Header />
     <MenuBar />
     <CategoryBar />
-    <ListPosts />
+    <PostContainer />
     <Footer />
   </div>
 );

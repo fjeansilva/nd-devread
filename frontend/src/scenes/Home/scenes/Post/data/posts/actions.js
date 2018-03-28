@@ -4,9 +4,10 @@ import {
   END_REQUEST_POST,
   THROW_ERROR_POST,
   RECEIVE_POSTS,
-  GET_POST,
+  SELECTED_POST,
   VOTE_POST,
   EDIT_POST,
+  DELETE_POST,
 } from './constants/ActionTypes';
 import * as api from './api';
 
@@ -30,9 +31,8 @@ export const fetchPosts = () => async (dispatch) => {
   try {
     dispatch(startRequestPost());
     await api.getPosts()
-      .then((result) => {
-        const { data } = result;
-        dispatch({ type: RECEIVE_POSTS, data });
+      .then((data) => {
+        dispatch({ type: RECEIVE_POSTS, posts: data });
       });
   } catch (error) {
     dispatch(throwErrorPost(error));
@@ -47,7 +47,7 @@ export const fetchPost = id => async (dispatch) => {
     await api.getPost(id)
       .then((data) => {
         const { post } = data;
-        dispatch({ type: GET_POST, post });
+        dispatch({ type: SELECTED_POST, post });
       });
   } catch (error) {
     dispatch(throwErrorPost(error));
@@ -74,3 +74,11 @@ export const editPost = (id, title, body) => async (dispatch) => {
   }
 };
 
+export const deletePost = id => (dispatch) => {
+  try {
+    api.deletePost(id)
+      .then(({ post }) => dispatch({ type: DELETE_POST, id: post.id }));
+  } catch (error) {
+    dispatch(throwErrorPost(error));
+  }
+};

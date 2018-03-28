@@ -1,16 +1,22 @@
 import React from 'react';
 import { Icon } from 'antd';
+import PropTypes from 'prop-types';
 
-const CoverCard = ({ totalComments }) => (
+const CoverCard = ({ id, commentCount }) => (
   <div className="post__card-cover">
     <div>
-      <Icon type="delete" />
-      <Icon type="edit" />
+      <Icon type="delete" onClick={() => console.log('delete post: ', id)} />
+      <Icon type="edit" onClick={() => console.log('edit post: ', id)} />
     </div>
     <div>
-      {totalComments} comment(s)
+      {commentCount} comment(s)
     </div>
   </div>
 );
+
+CoverCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  commentCount: PropTypes.number.isRequired,
+};
 
 export default CoverCard;

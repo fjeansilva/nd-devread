@@ -6,9 +6,10 @@ import {
   THROW_ERROR_POST,
   RECEIVE_POSTS,
   ADD_POST,
-  GET_POST,
+  SELECTED_POST,
   VOTE_POST,
-  EDIT_POST
+  EDIT_POST,
+  DELETE_POST,
 } from '../constants/ActionTypes';
 
 import * as actions from '../actions';
@@ -50,18 +51,13 @@ describe('Post actions', () => {
       voteScore: 3,
     };
 
-    api.setMockPostRequest(Promise.resolve({
-      data: [
-        payload,
-        payload,
-      ],
-    }));
+    api.setMockPostRequest(Promise.resolve([payload, payload]));
     const dispatch = jest.fn();
     await actions.fetchPosts()(dispatch);
     expect(api.getPosts).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: START_REQUEST_POST }],
-      [{ type: RECEIVE_POSTS, data: [payload, payload] }],
+      [{ type: RECEIVE_POSTS, posts: [payload, payload] }],
       [{ type: END_REQUEST_POST }],
     ]);
   });
@@ -88,7 +84,7 @@ describe('Post actions', () => {
     ]);
   });
 
-  it('getPost should dispatch a GET_POST action', async () => {
+  it('fetchPost should dispatch a SELECTED_POST action', async () => {
     const payload = {
       id: 1,
       title: 'React is Awesome',
@@ -107,7 +103,7 @@ describe('Post actions', () => {
     expect(api.getPost).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: START_REQUEST_POST }],
-      [{ type: GET_POST, post: payload }],
+      [{ type: SELECTED_POST, post: payload }],
       [{ type: END_REQUEST_POST }],
     ]);
   });
@@ -153,6 +149,28 @@ describe('Post actions', () => {
     expect(api.editPost).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: EDIT_POST, post: payload }],
+    ]);
+  });
+
+  it('deletePost should dispatch a DELETE_POST action', async () => {
+    const payload = {
+      id: 1,
+      title: 'React is Awesome',
+      body: 'React and Redux is like Iron Man and Hulk',
+      author: 'fjeansilva',
+      category: 'react',
+      voteScore: 3,
+    };
+
+    api.setMockPostRequest(Promise.resolve({
+      post: payload,
+    }));
+
+    const dispatch = jest.fn();
+    await actions.deletePost(1)(dispatch);
+    expect(api.deletePost).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: DELETE_POST, id: payload.id }],
     ]);
   });
 });
