@@ -8,6 +8,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.8",
     "@fortawesome/react-fontawesome": "^0.0.18",
     "antd": "^3.3.3",
+    "cross-fetch": "^2.1.0",
     "node-sass-chokidar": "^1.2.1",
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
@@ -16,7 +17,8 @@
     "react-router-dom": "^4.2.2",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
@@ -24,8 +26,10 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "fetch-mock": "^6.3.0",
     "flow-bin": "^0.68.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "redux-mock-store": "^1.5.1"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",

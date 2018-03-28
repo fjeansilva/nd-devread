@@ -7,6 +7,7 @@ import store from './store';
 import App from './scenes/App';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
+import { addPost } from './scenes/Home/scenes/Post/data/posts/actions';
 
 ReactDOM.render(
   <Provider store={store}>
