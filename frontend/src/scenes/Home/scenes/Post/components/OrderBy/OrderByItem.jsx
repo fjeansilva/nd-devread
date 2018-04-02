@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-const activeClass = 'menu__bar__item--active';
+const activeClass = 'orderby__item--active';
 
 const OrderByItem = ({
   title, pathname, search, active, handleClick,
 }) => (
-  <li className={`menu__bar__item ${active ? activeClass : ''}`} style={{ borderRadius: '3px' }}>
+  <li className={`orderby__item ${active ? activeClass : ''}`}>
     <NavLink
       to={{
         pathname,

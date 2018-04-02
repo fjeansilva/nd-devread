@@ -8,6 +8,14 @@ import CreatePostForm from './scenes/Post/scenes/Create';
 import EditPostForm from './scenes/Post/scenes/Edit';
 import { addPost } from './scenes/Post/data/posts/actions';
 import './index.css';
+import { notification } from 'antd';
+
+const successNotification = (type) => {
+  notification[type]({
+    message: 'Success',
+    description: 'Post created successfully.',
+  });
+};
 
 class Home extends Component {
   state = {
@@ -27,6 +35,7 @@ class Home extends Component {
 
   handlePostCreate = values => {
     this.props.addPost(values);
+    successNotification('success');
   }
 
   handlePostEdit = values => {
@@ -52,10 +61,7 @@ class Home extends Component {
           onCancel={this.onVisibleCreateForm}
           onSubmit={this.handlePostCreate}
         />
-        <EditPostForm
-          onSubmit={this.handlePostEdit}
-          onChange={this.handleFormChange}
-        />
+        <EditPostForm />
       </Page>
     );
   }

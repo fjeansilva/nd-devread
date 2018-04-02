@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ORDER_BY_VOTE_SCORE, ORDER_BY_DATE_CREATED } from '../../constants/OrderByTypes';
 import OrderByItem from './OrderByItem';
+import './index.css';
 
 const byVotes = '?orderBy=votes';
 const byDate = '?orderBy=date-created';
 
 const OrderBy = ({ location, setOrderBy, order }) => (
-  <ul className="menu__bar">
-    <li className="menu__bar__item">Order by:</li>
+  <ul className="menu__bar__orderby">
+    <li className="orderby__item">Order by:</li>
     <OrderByItem
       title="votes"
       pathname={location.pathname}

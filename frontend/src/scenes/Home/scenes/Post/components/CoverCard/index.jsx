@@ -1,13 +1,31 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { Icon, Modal, Button } from 'antd';
 import PropTypes from 'prop-types';
+
+const confirm = Modal.confirm;
+
+function showDeleteConfirm(callback, id) {
+  confirm({
+    title: 'Are you sure delete this post?',
+    content: '',
+    okText: 'Yes',
+    okType: 'danger',
+    cancelText: 'No',
+    onOk() {
+      callback(id);
+    },
+    onCancel() {
+      console.log('Cancel');
+    },
+  });
+}
 
 const CoverCard = ({
   id, commentCount, onDelete, onEdit
 }) => (
   <div className="post__card-cover">
     <div>
-      <Icon type="delete" onClick={() => onDelete(id)} />
+      <Icon type="delete" onClick={() => showDeleteConfirm(onDelete, id)} />
       <Icon type="edit" onClick={() => onEdit(id)} />
     </div>
     <div>
