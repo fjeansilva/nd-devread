@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
 import { Form, Input, Select, Modal } from 'antd';
+import { connect } from 'react-redux';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { TextArea } = Input;
 
+const renderCategories = (listCategories) => {
+  if (Object.keys(listCategories).length === 0) {
+    return;
+  }
+
+  const categories = Object.values(listCategories);
+
+  return categories.map(c => <Option key={c.path} value={c.path}>{c.name}</Option>);
+};
+
 class CreateFormContainer extends Component {
   render() {
-    const { visible, onCancel, onCreate, form } = this.props;
+    const { visible, onCancel, onCreate, form, categories } = this.props;
     const { getFieldDecorator } = form;
-
     return (
       <Modal
         visible={visible}
@@ -37,11 +47,7 @@ class CreateFormContainer extends Component {
                 optionFilterProp="children"
                 filterOption={(input, option) => option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
               >
-                <Option value="react">React</Option>
-                <Option value="redux">Redux</Option>
-                <Option value="react-native">React Native</Option>
-                <Option value="javascript">JavaScript</Option>
-                <Option value="udacity">Udacity</Option>
+                {renderCategories(categories)}
               </Select>
             )}
           </FormItem>
@@ -65,4 +71,8 @@ class CreateFormContainer extends Component {
   }
 }
 
-export default Form.create()(CreateFormContainer);
+const mapStateToProps = state => ({
+  categories: state.Home.scenes.Post.data.categories,
+});
+
+export default Form.create()(connect(mapStateToProps)(CreateFormContainer));

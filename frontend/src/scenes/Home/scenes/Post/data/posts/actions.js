@@ -8,6 +8,7 @@ import {
   EDIT_POST,
   DELETE_POST,
   RESET_POST,
+  RECEIVE_CATEGORIES,
 } from './constants/ActionTypes';
 import * as api from './api';
 

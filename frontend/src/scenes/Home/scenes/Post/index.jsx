@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Notification from '../../../../components/Notification';
 import { fetchPosts, deletePost, fetchPost, votePost } from './data/posts/actions';
+import { getCategories } from './data/categories/actions';
 import PostList from './components/PostList';
 import Loader from '../../../../components/Loader';
 import {
@@ -35,6 +36,7 @@ const orderPosts = (posts, orderBy) => {
 class PostContainer extends Component {
   componentDidMount() {
     this.props.getPosts();
+    this.props.getCategories();
   }
 
   onDeletePost = id => {
@@ -74,6 +76,7 @@ const mapDispatchToProps = dispatch => ({
   getPost: id => dispatch(fetchPost(id)),
   deletePost: id => dispatch(deletePost(id)),
   votePost: (id, option) => dispatch(votePost(id, option)),
+  getCategories: () => dispatch(getCategories()),
 });
 
 PostContainer.propTypes = {
