@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import OrderByContainer from '../OrderBy/OrderByContainer';
 import './index.css';
 
 const MenuBar = ({ handleClick }) => (
@@ -7,13 +8,7 @@ const MenuBar = ({ handleClick }) => (
     <a href="/" onClick={handleClick} className="menu__bar__add">
       New post
     </a>
-    <ul className="menu__bar">
-      <li className="menu__bar__item menu__bar__item--active" style={{ borderRadius: '3px' }}>
-        <a href="/" className="item item--active">
-          Add Comment
-        </a>
-      </li>
-    </ul>
+    <OrderByContainer />
   </section>
 );
 

@@ -7,6 +7,7 @@ import {
   RESET_POST,
 } from './data/posts/constants/ActionTypes';
 import dataReducer from './data/reducer';
+import orderReducer from './components/OrderBy/reducer';
 
 const initialState = { isFetching: false, error: null };
 
@@ -42,6 +43,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         data: dataReducer(rest.data, action),
+        postsOrderBy: orderReducer(rest.postsOrderBy, action),
       };
     }
   }

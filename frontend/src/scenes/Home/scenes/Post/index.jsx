@@ -5,11 +5,31 @@ import Notification from '../../../../components/Notification';
 import { fetchPosts, deletePost, fetchPost, votePost } from './data/posts/actions';
 import PostList from './components/PostList';
 import Loader from '../../../../components/Loader';
+import {
+  ORDER_BY_VOTE_SCORE,
+  ORDER_BY_DATE_CREATED,
+} from './constants/OrderByTypes';
 
 const styleSpin = {
   position: 'absolute',
   top: '50%',
   left: '50%',
+};
+
+const orderPosts = (posts, orderBy) => {
+  if (Object.keys(posts).length === 0) return [];
+  const items = Object.values(posts);
+
+  if (!orderBy) return items;
+
+  switch (orderBy) {
+    case ORDER_BY_VOTE_SCORE:
+      return items.sort((a, b) => b.voteScore > a.voteScore);
+    case ORDER_BY_DATE_CREATED:
+      return items.sort((a, b) => b.timestamp > a.timestamp);
+    default:
+      return items;
+  }
 };
 
 class PostContainer extends Component {
@@ -33,21 +53,19 @@ class PostContainer extends Component {
     const { recentPosts, error } = this.props;
     if (!recentPosts) return <Loader />;
     return (
-      <div>
-        <PostList
-          items={recentPosts}
-          onDelete={this.onDeletePost}
-          onEdit={this.onEditPost}
-          onVote={this.onVotePost}
-        />
-      </div>
+      <PostList
+        items={recentPosts}
+        onDelete={this.onDeletePost}
+        onEdit={this.onEditPost}
+        onVote={this.onVotePost}
+      />
     );
   }
 }
 
+
 const mapStateToProps = state => ({
-  recentPosts: Object.values(state.Home.scenes.Post.data.posts).length > 0 ?
-    Object.values(state.Home.scenes.Post.data.posts) : [],
+  recentPosts: orderPosts(state.Home.scenes.Post.data.posts, state.Home.scenes.Post.postsOrderBy),
   error: state.Home.scenes.Post.error,
 });
 

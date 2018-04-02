@@ -53,8 +53,6 @@ const ModalEditForm = Form.create(settings)(
         }
         const { title, body } = values;
         const { id } = postSelected;
-        console.log(id, title, body);
-        
         this.props.editPost(id, title, body);
         form.resetFields();
         this.handleCancel(e);
