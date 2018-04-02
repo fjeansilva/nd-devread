@@ -5,7 +5,6 @@ import {
   THROW_ERROR_POST,
   RECEIVE_POSTS,
   SELECTED_POST,
-  VOTE_POST,
   EDIT_POST,
   DELETE_POST,
   RESET_POST,
@@ -51,10 +50,10 @@ export const fetchPost = id => async (dispatch) => {
     .catch(error => dispatch(throwErrorPost(error)));
 };
 
-export const votePost = (id, vote) => async (dispatch) => {
+export const votePost = (id, option) => async (dispatch) => {
   try {
-    api.votePost(id, vote)
-      .then(({ post }) => dispatch({ type: VOTE_POST, post }));
+    api.votePost(id, option)
+      .then(post => dispatch({ type: EDIT_POST, post }));
   } catch (error) {
     dispatch(throwErrorPost(error));
   }

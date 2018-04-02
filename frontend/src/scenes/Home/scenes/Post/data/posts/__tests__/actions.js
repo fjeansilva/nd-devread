@@ -115,15 +115,13 @@ describe('Post actions', () => {
       voteScore: 3,
     };
 
-    api.setMockPostRequest(Promise.resolve({
-      post: payload,
-    }));
+    api.setMockPostRequest(Promise.resolve(payload));
 
     const dispatch = jest.fn();
     await actions.votePost(1, 'upVote')(dispatch);
     expect(api.votePost).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
-      [{ type: VOTE_POST, post: payload }],
+      [{ type: EDIT_POST, post: payload }],
     ]);
   });
 

@@ -7,13 +7,22 @@ import '../post.css';
 
 export default function PostCard(props) {
   const {
-    id, voteScore,
+    id,
+    voteScore,
+    onVote,
   } = props;
+
+  const wrapperActions = [
+    <div>Score {voteScore}</div>,
+    <Icon type="like-o" onClick={() => onVote(id, 'upVote')} />,
+    <Icon type="dislike-o" onClick={() => onVote(id, 'downVote')} />,
+  ];
+
   return (
     <Card
       style={{ width: 300 }}
       cover={<CoverCard {...props} />}
-      actions={[<div>Score {voteScore}</div>, <Icon type="like-o" onClick={() => console.log('upVote post: ', id)} />, <Icon type="dislike-o" onClick={() => console.log('down post: ', id)} />]}
+      actions={wrapperActions}
     >
       <ContentCard {...props} />
     </Card>
@@ -28,4 +37,5 @@ PostCard.propTypes = {
   commentCount: PropTypes.number.isRequired,
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
+  onVote: PropTypes.func.isRequired,
 };

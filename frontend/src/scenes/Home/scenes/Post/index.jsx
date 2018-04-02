@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Notification from '../../../../components/Notification';
-import { fetchPosts, deletePost, fetchPost } from './data/posts/actions';
+import { fetchPosts, deletePost, fetchPost, votePost } from './data/posts/actions';
 import PostList from './components/PostList';
 import Loader from '../../../../components/Loader';
 
@@ -25,12 +25,21 @@ class PostContainer extends Component {
     this.props.getPost(id);
   }
 
+  onVotePost = (id, option) => {
+    this.props.votePost(id, option);
+  }
+
   render() {
     const { recentPosts, error } = this.props;
     if (!recentPosts) return <Loader />;
     return (
       <div>
-        <PostList items={recentPosts} onDelete={this.onDeletePost} onEdit={this.onEditPost}/>
+        <PostList
+          items={recentPosts}
+          onDelete={this.onDeletePost}
+          onEdit={this.onEditPost}
+          onVote={this.onVotePost}
+        />
       </div>
     );
   }
@@ -46,6 +55,7 @@ const mapDispatchToProps = dispatch => ({
   getPosts: () => dispatch(fetchPosts()),
   getPost: id => dispatch(fetchPost(id)),
   deletePost: id => dispatch(deletePost(id)),
+  votePost: (id, option) => dispatch(votePost(id, option)),
 });
 
 PostContainer.propTypes = {
@@ -54,6 +64,7 @@ PostContainer.propTypes = {
   error: PropTypes.string,
   deletePost: PropTypes.func.isRequired,
   getPost: PropTypes.func.isRequired,
+  votePost: PropTypes.func.isRequired,
 };
 
 PostContainer.defaultProps = {
