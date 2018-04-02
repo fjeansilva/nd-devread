@@ -4,6 +4,7 @@ import {
   ADD_POST,
   EDIT_POST,
   DELETE_POST,
+  SELECTED_POST,
 } from '../constants/ActionTypes';
 import reducer from '../reducer';
 
@@ -98,4 +99,18 @@ describe('Post reducer', () => {
         [postRedux.id]: postRedux,
       });
   });
+
+  // TODO: MOVE TO PARENT TEST
+  // it('should handle SELECTED_POST', () => {
+  //   const state = {
+  //     isFetching: false,
+  //     data: {},
+  //   };
+
+  //   expect(reducer(state, { type: SELECTED_POST, post: postReact }))
+  //     .toEqual({
+  //       ...state,
+  //       postSelected: postReact,
+  //     });
+  // });
 });

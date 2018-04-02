@@ -7,12 +7,12 @@ import '../post.css';
 
 export default function PostCard(props) {
   const {
-    id, commentCount, voteScore,
+    id, voteScore,
   } = props;
   return (
     <Card
       style={{ width: 300 }}
-      cover={<CoverCard id={id} commentCount={commentCount} />}
+      cover={<CoverCard {...props} />}
       actions={[<div>Score {voteScore}</div>, <Icon type="like-o" onClick={() => console.log('upVote post: ', id)} />, <Icon type="dislike-o" onClick={() => console.log('down post: ', id)} />]}
     >
       <ContentCard {...props} />
@@ -26,4 +26,6 @@ PostCard.propTypes = {
   body: PropTypes.string.isRequired,
   voteScore: PropTypes.number.isRequired,
   commentCount: PropTypes.number.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };

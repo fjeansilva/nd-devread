@@ -72,9 +72,7 @@ describe('Post actions', () => {
       voteScore: 0,
     };
 
-    api.setMockPostRequest(Promise.resolve({
-      post: payload,
-    }));
+    api.setMockPostRequest(Promise.resolve(payload));
 
     const dispatch = jest.fn();
     await actions.addPost()(dispatch);
@@ -84,29 +82,28 @@ describe('Post actions', () => {
     ]);
   });
 
-  it('fetchPost should dispatch a SELECTED_POST action', async () => {
-    const payload = {
-      id: 1,
-      title: 'React is Awesome',
-      body: 'React and Redux is like Iron Man and Hulk',
-      author: 'fjeansilva',
-      category: 'react',
-      voteScore: 3,
-    };
+  // TODO: MOVE TO PARENT TEST
+  // it('fetchPost should dispatch a SELECTED_POST action', async () => {
+  //   const payload = {
+  //     id: 1,
+  //     title: 'React is Awesome',
+  //     body: 'React and Redux is like Iron Man and Hulk',
+  //     author: 'fjeansilva',
+  //     category: 'react',
+  //     voteScore: 3,
+  //   };
 
-    api.setMockPostRequest(Promise.resolve({
-      post: payload,
-    }));
+  //   api.setMockPostRequest(Promise.resolve(payload));
 
-    const dispatch = jest.fn();
-    await actions.fetchPost(1)(dispatch);
-    expect(api.getPost).toHaveBeenCalled();
-    expect(dispatch.mock.calls).toEqual([
-      [{ type: START_REQUEST_POST }],
-      [{ type: SELECTED_POST, post: payload }],
-      [{ type: END_REQUEST_POST }],
-    ]);
-  });
+  //   const dispatch = jest.fn();
+  //   await actions.fetchPost(1)(dispatch);
+  //   expect(api.getPost).toHaveBeenCalled();
+  //   expect(dispatch.mock.calls).toEqual([
+  //     [{ type: START_REQUEST_POST }],
+  //     [{ type: SELECTED_POST, post: payload }],
+  //     [{ type: END_REQUEST_POST }],
+  //   ]);
+  // });
 
   it('votePost should dispatch a VOTE_POST action', async () => {
     const payload = {
@@ -140,9 +137,7 @@ describe('Post actions', () => {
       voteScore: 3,
     };
 
-    api.setMockPostRequest(Promise.resolve({
-      post: payload,
-    }));
+    api.setMockPostRequest(Promise.resolve(payload));
 
     const dispatch = jest.fn();
     await actions.editPost(1, 'Title React', 'TDD with Redux is awesome!')(dispatch);
@@ -162,9 +157,7 @@ describe('Post actions', () => {
       voteScore: 3,
     };
 
-    api.setMockPostRequest(Promise.resolve({
-      post: payload,
-    }));
+    api.setMockPostRequest(Promise.resolve(payload));
 
     const dispatch = jest.fn();
     await actions.deletePost(1)(dispatch);

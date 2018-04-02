@@ -3,6 +3,8 @@ import {
   START_REQUEST_POST,
   END_REQUEST_POST,
   THROW_ERROR_POST,
+  SELECTED_POST,
+  RESET_POST,
 } from './data/posts/constants/ActionTypes';
 import dataReducer from './data/reducer';
 
@@ -24,6 +26,16 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         error: action.error.message,
+      };
+    case SELECTED_POST:
+      return {
+        ...state,
+        postSelected: action.post,
+      };
+    case RESET_POST:
+      return {
+        ...state,
+        postSelected: undefined,
       };
     default: {
       const rest = _.omit(state, Object.keys(initialState));

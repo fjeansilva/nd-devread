@@ -1,9 +1,5 @@
 import React from 'react';
-import { Button, Timeline } from 'antd';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
-import faComments from '@fortawesome/fontawesome-free-solid/faComments';
 import Header from '../../../../../../components/Header';
-import MenuBar from '../../../../../../components/MenuBar';
 import Footer from '../../../../../../components/Footer';
 import Summary from './components/Summary';
 import PostCategory from './components/PostCategory';
@@ -22,10 +18,9 @@ const text = 'I’ve been working on very large web applications for the past fe
 const DetailsPost = () => (
   <div>
     <Header />
-    <MenuBar />
     <Summary>
       <PostCategory category="react" />
-      <PostTitle title="React is Awesome!!"/>
+      <PostTitle title="React is Awesome!!" />
       <Info
         username="Jean Silva"
         totalComments="666"

@@ -2,7 +2,7 @@
 import fetch from 'cross-fetch';
 import uuidv1 from 'uuid/v1';
 
-const api = 'http://localhost:3001';
+const api = 'http://192.168.0.15:3001';
 
 let { token } = localStorage;
 
@@ -32,10 +32,8 @@ export const addPost = (post) => {
   };
 
   const postItem = Object.assign(defaultValues, post);
-  fetch(`${api}/posts`, { method: 'post', headers, body: JSON.stringify(postItem) })
-    .then(data => data.json())
-    .then(data => data)
-    .catch(err => err);
+  return fetch(`${api}/posts`, { method: 'post', headers, body: JSON.stringify(postItem) })
+    .then(data => data.json());
 };
 
 export const getPost = id =>
@@ -51,10 +49,9 @@ export const votePost = (id, vote) => {
     body: JSON.stringify({ option: vote }),
   };
 
-  fetch(`${api}/posts/${id}`, params)
+  return fetch(`${api}/posts/${id}`, params)
     .then(data => data.json())
-    .then(data => data)
-    .catch(err => err);
+    .then(data => data);
 };
 
 export const editPost = (id, title, body) => {
@@ -69,10 +66,9 @@ export const editPost = (id, title, body) => {
     body: JSON.stringify(post),
   };
 
-  fetch(`${api}/posts/${id}`, params)
+  return fetch(`${api}/posts/${id}`, params)
     .then(data => data.json())
-    .then(data => data)
-    .catch(err => err);
+    .then(data => data);
 };
 
 export const deletePost = (id) => {
@@ -86,8 +82,7 @@ export const deletePost = (id) => {
     body: JSON.stringify(post),
   };
 
-  fetch(`${api}/posts/${id}`, params)
+  return fetch(`${api}/posts/${id}`, params)
     .then(data => data.json())
-    .then(data => data)
-    .catch(err => err);
+    .then(data => data);
 };
