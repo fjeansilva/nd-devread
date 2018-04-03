@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 
-const ButtonUpVote = () => (
+const ButtonDownVote = ({ onClick }) => (
   <li>
-    <Button type="danger" shape="circle" icon="dislike-o" ghost />
+    <Button onClick={onClick} type="danger" shape="circle" icon="dislike-o" ghost />
   </li>
 );
 
-export default ButtonUpVote;
+export default ButtonDownVote;

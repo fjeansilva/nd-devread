@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 
-const ButtonUpVote = () => (
+const ButtonUpVote = ({ onClick }) => (
   <li>
-    <Button type="primary" shape="circle" icon="like-o" ghost />
+    <Button onClick={onClick} type="primary" shape="circle" icon="like-o" ghost />
   </li>
 );
 

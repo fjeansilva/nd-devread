@@ -12,7 +12,7 @@ const CardContent = ({
   <Meta
     avatar={<AvatarUser />}
     title={<Link to={`/${category}/${id}`}>{title}</Link>}
-    description={body}
+    description={body.slice(0, 50).concat('...')}
   />
 );
 

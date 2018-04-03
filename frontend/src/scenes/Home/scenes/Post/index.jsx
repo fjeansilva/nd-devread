@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Notification from '../../../../components/Notification';
 import { fetchPosts, deletePost, fetchPost, votePost } from './data/posts/actions';
 import { getCategories } from './data/categories/actions';
 import PostList from './components/PostList';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Switch, Route } from 'react-router-dom';
 import Home from '../Home';
 import DetailsPost from '../Home/scenes/Post/scenes/Details';

@@ -8,7 +8,7 @@ import {
   EDIT_POST,
   DELETE_POST,
   RESET_POST,
-  RECEIVE_CATEGORIES,
+  VOTE_POST,
 } from './constants/ActionTypes';
 import * as api from './api';
 
@@ -54,7 +54,7 @@ export const fetchPost = id => async (dispatch) => {
 export const votePost = (id, option) => async (dispatch) => {
   try {
     api.votePost(id, option)
-      .then(post => dispatch({ type: EDIT_POST, post }));
+      .then(post => dispatch({ type: VOTE_POST, post }));
   } catch (error) {
     dispatch(throwErrorPost(error));
   }
