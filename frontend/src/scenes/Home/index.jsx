@@ -20,6 +20,7 @@ const successNotification = (type) => {
 class Home extends Component {
   state = {
     visibleCreateForm: false,
+    showEditForm: false,
   }
 
   handleClick = (e) => {
@@ -38,37 +39,52 @@ class Home extends Component {
     successNotification('success');
   }
 
-  handlePostEdit = values => {
-    console.log(values);
-  }
-
   handleFormChange = (changedFields) => {
     this.setState(({ fields }) => ({
       fields: { ...fields, ...changedFields },
     }));
   }
 
+  handleUpdateDone = () => {    
+    this.setState({
+      showEditForm: false,
+    });
+  }
+
+  handleModal = () => {
+    this.setState({
+      showEditForm: true,
+    });
+  }
+
   render() {
     const { visibleCreateForm } = this.state;
     const { postSelected } = this.props;
+  
     return (
       <Page>
         <MenuBar handleClick={this.handleClick} />
         <CategoryBar />
-        <PostContainer />
+        <PostContainer handleEdit={this.handleModal} />
         <CreatePostForm
           visible={visibleCreateForm}
           onCancel={this.onVisibleCreateForm}
           onSubmit={this.handlePostCreate}
         />
-        <EditPostForm />
+        <EditPostForm
+          visible={this.state.showEditForm}
+          done={this.handleUpdateDone}
+        />
       </Page>
     );
   }
 }
+const mapStateToProps = state => ({
+  postSelected: state.Home.scenes.Post.postSelected,
+});
 
 const mapDispatchToProps = dispatch => ({
   addPost: values => dispatch(addPost(values)),
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

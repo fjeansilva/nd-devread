@@ -44,6 +44,7 @@ class PostContainer extends Component {
 
   onEditPost = id => {
     this.props.getPost(id);
+    this.props.handleEdit();
   }
 
   onVotePost = (id, option) => {

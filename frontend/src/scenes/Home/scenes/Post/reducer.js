@@ -5,6 +5,7 @@ import {
   THROW_ERROR_POST,
   SELECTED_POST,
   VOTE_POST,
+  EDIT_POST,
   RESET_POST,
 } from './data/posts/constants/ActionTypes';
 import dataReducer from './data/reducer';
@@ -29,6 +30,24 @@ export default function reducer(state = initialState, action) {
         ...state,
         error: action.error.message,
       };
+    case EDIT_POST: {
+      const newData = state.data;
+      newData.posts[action.post.id] = action.post;
+      const selectedPost = state.postSelected;
+      if (selectedPost) {
+        if (selectedPost.id === action.post.id) {
+          return {
+            ...state,
+            postSelected: action.post,
+            data: newData,
+          };
+        }
+      }
+      return {
+        ...state,
+        data: newData,
+      };
+    }
     case VOTE_POST: {
       const newData = state.data;
       newData.posts[action.post.id] = action.post;

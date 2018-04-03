@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 
-const ButtonEdit = () => (
+const ButtonEdit = ({ onClick }) => (
   <li>
-    <Button shape="circle" icon="edit" />
+    <Button onClick={onClick} shape="circle" icon="edit" />
   </li>
 );
 

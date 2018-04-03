@@ -29,20 +29,9 @@ const settings = {
 
 const ModalEditForm = Form.create(settings)(
   class extends Component {
-    state = {
-      showModal: false,
-    }
-
-    componentWillReceiveProps = (nextProps) => {
-      const { postSelected } = nextProps
-      this.setState({
-        showModal: postSelected !== undefined,
-      });
-    }
-
     handleCancel = (e) => {
       e.preventDefault();
-      this.props.resetPost();      
+      this.props.done();
     }
 
     handleSubmit = (e) => {
@@ -55,18 +44,19 @@ const ModalEditForm = Form.create(settings)(
         const { id } = postSelected;
         this.props.editPost(id, title, body);
         form.resetFields();
-        this.handleCancel(e);
+        this.props.done();
       });
     }
-    
+
     render(){
       const {
         getFieldDecorator,
         onCancel,
       } = this.props.form;
+      
       return (
         <Modal
-          visible={this.state.showModal}
+          visible={this.props.visible}
           title="EDIT POST"
           okText="Save"
           onCancel={this.handleCancel}

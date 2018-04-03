@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 
-const ButtonDelete = () => (
+const ButtonDelete = ({ onClick }) => (
   <li>
-    <Button shape="circle" icon="delete" />
+    <Button onClick={onClick} shape="circle" icon="delete" />
   </li>
 );
 

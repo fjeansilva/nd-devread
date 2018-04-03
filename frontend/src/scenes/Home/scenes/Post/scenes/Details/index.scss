@@ -1,12 +1,18 @@
 .post__details {
+  margin: 50px 15px;
+}
+
+.post__details {
   @media screen and (max-width: 420px) {
-    margin: 0 15px;
+    margin: 20px 15px;
   }
 
   @media screen and (max-width: 768px) {
-    margin: 0 15px;
+    margin: 20px 15px;
   }
 }
+
+
 
 .post__category {
   margin: 10px 0;

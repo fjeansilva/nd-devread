@@ -17,6 +17,7 @@ export default function postsReducer(state = initialState, action) {
         [action.post.id]: action.post,
       };
     case EDIT_POST:
+      console.log('edit post - update list', action)
       return {
         ...state,
         [action.post.id]: action.post,
