@@ -2,6 +2,7 @@
 import {
   RECEIVE_COMMENTS,
   VOTE_COMMENT,
+  ADD_COMMENT,
 } from '../constants/ActionTypes';
 
 import * as api from '../api';
@@ -49,5 +50,15 @@ describe('Comments actions', () => {
     const commentId = 1;
     actions.voteComment(commentId, 'upVote')(dispatch);
     expect(api.voteComment).toHaveBeenCalled();
+  });
+
+  it('addComment should dispatch a ADD_COMMENT', async () => {
+    api.setMockCommentRequest(Promise.resolve(firstComment));
+    const dispatch = jest.fn();
+    await actions.addComment()(dispatch);
+    expect(api.addComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: ADD_COMMENT, comment: firstComment }],
+    ]);
   });
 });

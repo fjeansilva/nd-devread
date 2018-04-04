@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import CommentGroup from '../CommentGroup';
 import CommentItem from '../CommentItem';
 import CommentListHeader from '../CommentListHeader';
+import CreateComment from '../../scenes/Comment/scenes/Create';
 
-const CommentList = ({ items }) => (
+const CommentList = ({ postId, items }) => (
   <section>
     <CommentListHeader commentCount={items.length} />
+    <CreateComment postId={postId} />
     <CommentGroup>
       {items.map(c => <CommentItem key={c.id} {...c} />)}
     </CommentGroup>
@@ -15,6 +17,7 @@ const CommentList = ({ items }) => (
 
 CommentList.propTypes = {
   items: PropTypes.array,
+  postId: PropTypes.string.isRequired,
 };
 
 export default CommentList;

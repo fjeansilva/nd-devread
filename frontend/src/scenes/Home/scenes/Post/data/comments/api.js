@@ -35,3 +35,29 @@ export const voteComment = (id, option) => {
     .then(data => data);
 };
 
+export const addPost = (post) => {
+  const defaultValues = {
+    id: uuidv1(),
+    deleted: false,
+    timestamp: Date.now(),
+    voteScore: 0,
+  };
+
+  const postItem = Object.assign(defaultValues, post);
+  return fetch(`${api}/posts`, { method: 'post', headers, body: JSON.stringify(postItem) })
+    .then(data => data.json());
+};
+
+export const addComment = (comment) => {
+  const defaultValues = {
+    id: uuidv1(),
+    deleted: false,
+    timestamp: Date.now(),
+    voteScore: 0,
+  };
+
+  const commentItem = Object.assign(defaultValues, comment);
+  return fetch(`${api}/comments`, { method: 'post', headers, body: JSON.stringify(commentItem) })
+    .then(data => data.json());
+};
+

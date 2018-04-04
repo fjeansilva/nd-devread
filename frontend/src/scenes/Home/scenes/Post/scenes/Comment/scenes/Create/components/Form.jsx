@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addComment } from '../../../../../data/comments/actions';
 import { Form, Input, Button, Select } from 'antd';
 
 const FormItem = Form.Item;
@@ -10,7 +12,18 @@ class CreateCommentFormContainer extends Component {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+
+        const { author, body } = values;
+        const parentId = this.props.postId;
+
+        const comment = {
+          author,
+          body,
+          parentId,
+        };
+
+        this.props.addComment(comment);
+        this.props.form.resetFields();
       }
     });
   }
@@ -43,4 +56,8 @@ class CreateCommentFormContainer extends Component {
   }
 }
 
-export default Form.create()(CreateCommentFormContainer);
+const mapDispatchToProps = dispatch => ({
+  addComment: comment => dispatch(addComment(comment)),
+})
+
+export default Form.create()(connect(null, mapDispatchToProps)(CreateCommentFormContainer));

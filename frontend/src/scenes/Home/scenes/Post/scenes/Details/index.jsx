@@ -20,7 +20,11 @@ import Loader from '../../../../../../components/Loader';
 import { showDeleteConfirm } from '../../../../../../utils/helpers';
 import './index.css';
 
-const text = 'I’ve been working on very large web applications for the past few years, starting from ground zero and, with a dozen other developers, making them scale up to now be used by millions of people. And sometimes, if you didn’t start with a good folder structure, it can become difficult to keep your code organized.';
+const orderComments = (comments) => {
+  if (Object.keys(comments).length === 0) return [];
+  const items = Object.values(comments);
+  return items.sort((a, b) => b.voteScore > a.voteScore);
+};
 
 class DetailsPost extends Component {
   state = {
@@ -93,7 +97,7 @@ class DetailsPost extends Component {
             <ButtonUpVote onClick={() => this.onVotePost(id, 'upVote')} />
             <ButtonDownVote onClick={() => this.onVotePost(id, 'downVote')} />
           </GroupButton>
-          <CommentList items={comments} />
+          <CommentList items={comments} postId={id} />
         </Summary>
         <EditPostForm
           visible={this.state.showEdit}
@@ -116,7 +120,7 @@ DetailsPost.propTypes = {
 
 const mapStateToProps = state => ({
   post: state.Home.scenes.Post.postSelected,
-  comments: Object.values(state.Home.scenes.Post.data.comments),
+  comments: orderComments(state.Home.scenes.Post.data.comments),
 });
 
 const mapDispatchToProps = dispatch => ({

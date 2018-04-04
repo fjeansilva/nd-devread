@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 
 const CommentListHeader = ({ commentCount }) => (
   <p style={{
-      margin: '30px 0',
+      margin: '30px 0 10px 0',
       borderTop: '1px solid #e4e4e4',
-      padding: '30px 0',
-      }}>
+      padding: '30px 0 10px 0',
+      fontSize: '1.5em',
+      }}
+  >
     <b>{commentCount} Comment(s)</b>
   </p>
 );
