@@ -1,8 +1,10 @@
 /* global describe, it, expect, jest */
 import {
   RECEIVE_COMMENTS,
-  VOTE_COMMENT,
+  GET_COMMENT,
   ADD_COMMENT,
+  EDIT_COMMENT,
+  VOTE_COMMENT,
 } from '../constants/ActionTypes';
 
 import * as api from '../api';
@@ -44,12 +46,15 @@ describe('Comments actions', () => {
     ]);
   });
 
-  it('voteComment should dispatch a VOTE_COMMENT', () => {
+  it('voteComment should dispatch a VOTE_COMMENT', async () => {
     api.setMockCommentRequest(Promise.resolve(firstComment));
     const dispatch = jest.fn();
     const commentId = 1;
-    actions.voteComment(commentId, 'upVote')(dispatch);
+    await actions.voteComment(commentId, 'upVote')(dispatch);
     expect(api.voteComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: VOTE_COMMENT, comment: firstComment }],
+    ]);
   });
 
   it('addComment should dispatch a ADD_COMMENT', async () => {
@@ -59,6 +64,37 @@ describe('Comments actions', () => {
     expect(api.addComment).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: ADD_COMMENT, comment: firstComment }],
+    ]);
+  });
+
+  it('editComment should dispatch a EDIT_COMMENT', async () => {
+    const updatedComment = {
+      id: 1,
+      parentId: 1,
+      timestamp: Date.now(),
+      body: 'EDITED BODY COMMENT',
+      author: 'fjeansilva',
+      voteScore: 1,
+      deleted: false,
+      parentDeleted: false,
+    };
+
+    api.setMockCommentRequest(Promise.resolve(updatedComment));
+    const dispatch = jest.fn();
+    await actions.editComment()(dispatch);
+    expect(api.editComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: EDIT_COMMENT, comment: updatedComment }],
+    ]);
+  });
+
+  it('getComment should dispatch a GET_COMMENT', async () => {
+    api.setMockCommentRequest(Promise.resolve(firstComment));
+    const dispatch = jest.fn();
+    await actions.getComment()(dispatch);
+    expect(api.getComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: GET_COMMENT, comment: firstComment }],
     ]);
   });
 });

@@ -1,18 +1,12 @@
 import React from 'react';
-import TopBar from '../../../../../../../../components/TopBar';
-import Footer from '../../../../../../../../components/Footer';
 import EditForm from './components/Form';
 import './index.css';
 
-const Edit = () => (
-  <div>
-    <TopBar />
-    <section className="edit__comment">
-      <h1>EDIT COMMENT</h1>
-      <EditForm />
-    </section>
-    <Footer />
-  </div>
+const Edit = props => (
+  <section className="edit__comment">
+    <h3>Edit comment</h3>
+    <EditForm {...props} />
+  </section>
 );
 
 export default Edit;

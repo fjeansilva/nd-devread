@@ -9,10 +9,11 @@ import ButtonDownVote from '../../../../components/ButtonDownVote';
 const CommentControls = ({
   id,
   onVote,
+  onEdit,
 }) => (
   <GroupButton>
     <ButtonDelete />
-    <ButtonEdit />
+    <ButtonEdit onClick={() => onEdit(id)} />
     <ButtonUpVote onClick={() => onVote(id, 'upVote')} />
     <ButtonDownVote onClick={() => onVote(id, 'downVote')} />
   </GroupButton>
@@ -21,6 +22,7 @@ const CommentControls = ({
 CommentControls.propTypes = {
   id: PropTypes.string.isRequired,
   onVote: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
 };
 
 export default CommentControls;

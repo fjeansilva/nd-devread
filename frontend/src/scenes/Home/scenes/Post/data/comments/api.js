@@ -61,3 +61,25 @@ export const addComment = (comment) => {
     .then(data => data.json());
 };
 
+export const editComment = (id, body) => {
+  const comment = {
+    body,
+    timestamp: Date.now(),
+  };
+
+  const params = {
+    method: 'put',
+    headers,
+    body: JSON.stringify(comment),
+  };
+
+  return fetch(`${api}/comments/${id}`, params)
+    .then(data => data.json())
+    .then(data => data);
+};
+
+export const getComment = id =>
+  fetch(`${api}/comments/${id}`, { headers })
+    .then(data => data.json())
+    .then(data => data)
+    .catch(err => err);

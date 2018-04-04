@@ -8,6 +8,7 @@ import {
   EDIT_POST,
   RESET_POST,
 } from './data/posts/constants/ActionTypes';
+import { GET_COMMENT, CLEAR_COMMENT_SELECTED } from './data/comments/constants/ActionTypes';
 import dataReducer from './data/reducer';
 import orderReducer from './components/OrderBy/reducer';
 
@@ -15,6 +16,16 @@ const initialState = { isFetching: false, error: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+    case CLEAR_COMMENT_SELECTED:
+      return {
+        ...state,
+        commentSelected: null,
+      };
+    case GET_COMMENT:
+      return {
+        ...state,
+        commentSelected: action.comment,
+      };
     case START_REQUEST_POST:
       return {
         ...state,

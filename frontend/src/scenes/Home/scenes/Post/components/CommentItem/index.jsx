@@ -5,13 +5,17 @@ import { Timeline } from 'antd';
 import CommentHeader from '../../scenes/Comment/components/CommentHeader';
 import CommentContent from '../../scenes/Comment/components/CommentContent';
 import CommentControls from '../../scenes/Comment/components/CommentControls';
-import { voteComment } from '../../data/comments/actions';
+import { voteComment, getComment } from '../../data/comments/actions';
 
 const { Item } = Timeline;
 
 class CommentItem extends Component {
   handleVoteComment = (id, option) => {
     this.props.voteComment(id, option);
+  }
+
+  handleEditComment = (id) => {
+    this.props.getComment(id);
   }
 
   render(){
@@ -33,6 +37,7 @@ class CommentItem extends Component {
         <CommentControls
           id={id}
           onVote={this.handleVoteComment}
+          onEdit={this.handleEditComment}
         />
       </Item>
     )
@@ -49,6 +54,7 @@ CommentItem.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   voteComment: (id, option) => dispatch(voteComment(id, option)),
+  getComment: id => dispatch(getComment(id)),
 });
 
 export default connect(null, mapDispatchToProps)(CommentItem);

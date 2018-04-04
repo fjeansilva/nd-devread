@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import CommentGroup from '../CommentGroup';
 import CommentItem from '../CommentItem';
 import CommentListHeader from '../CommentListHeader';
 import CreateComment from '../../scenes/Comment/scenes/Create';
+import EditComment from '../../scenes/Comment/scenes/Edit';
 
-const CommentList = ({ postId, items }) => (
+const CommentList = ({ postId, items, commentSelected }) => (
   <section>
     <CommentListHeader commentCount={items.length} />
-    <CreateComment postId={postId} />
+    {!commentSelected && (
+      <CreateComment postId={postId} />
+    )}
+    {commentSelected && (
+      <EditComment comment={commentSelected} />
+    )}
     <CommentGroup>
       {items.map(c => <CommentItem key={c.id} {...c} />)}
     </CommentGroup>
@@ -18,6 +25,11 @@ const CommentList = ({ postId, items }) => (
 CommentList.propTypes = {
   items: PropTypes.array,
   postId: PropTypes.string.isRequired,
+  commentSelected: PropTypes.object,
 };
 
-export default CommentList;
+const mapStateToProps = state => ({
+  commentSelected: state.Home.scenes.Post.commentSelected,
+});
+
+export default connect(mapStateToProps)(CommentList);

@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-import { RECEIVE_COMMENTS, VOTE_COMMENT, ADD_COMMENT } from '../constants/ActionTypes';
+import { RECEIVE_COMMENTS, VOTE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../constants/ActionTypes';
 import reducer from '../reducer';
 
 const initialState = {};
@@ -77,6 +77,37 @@ describe('Comment reducer', () => {
         ...state,
         [secondComment.id]: {
           ...secondComment,
+        },
+      });
+  });
+
+
+  it('should handle EDIT_COMMENT', () => {
+    const updatedComment = {
+      id: 1,
+      parentId: 1,
+      timestamp: Date.now(),
+      body: 'EDITED BODY COMMENT',
+      author: 'fjeansilva',
+      voteScore: 1,
+      deleted: false,
+      parentDeleted: false,
+    };
+
+    const state = {
+      [firstComment.id]: {
+        ...firstComment,
+      },
+      [secondComment.id]: {
+        ...secondComment,
+      },
+    };
+
+    expect(reducer(state, { type: EDIT_COMMENT, comment: updatedComment }))
+      .toEqual({
+        ...state,
+        [updatedComment.id]: {
+          ...updatedComment,
         },
       });
   });
