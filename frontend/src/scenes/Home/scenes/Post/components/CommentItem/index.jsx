@@ -1,17 +1,54 @@
-import React from 'react';
-import { Timeline, Button } from 'antd';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Timeline } from 'antd';
 import CommentHeader from '../../scenes/Comment/components/CommentHeader';
 import CommentContent from '../../scenes/Comment/components/CommentContent';
 import CommentControls from '../../scenes/Comment/components/CommentControls';
+import { voteComment } from '../../data/comments/actions';
 
-const Item = Timeline.Item;
+const { Item } = Timeline;
 
-const CommentItem = ({ username, description }) => (
-  <Item>
-    <CommentHeader username={username} />
-    <CommentContent description={description} />
-    <CommentControls />
-  </Item>
-);
+class CommentItem extends Component {
+  handleVoteComment = (id, option) => {
+    this.props.voteComment(id, option);
+  }
 
-export default CommentItem;
+  render(){
+    const {
+      id,
+      author,
+      body,
+      timestamp,
+      voteScore,
+    } = this.props;
+    return (
+      <Item>
+        <CommentHeader
+          username={author}
+          date={timestamp}
+          voteScore={voteScore}
+        />
+        <CommentContent description={body} />
+        <CommentControls
+          id={id}
+          onVote={this.handleVoteComment}
+        />
+      </Item>
+    )
+  }
+}
+
+CommentItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  timestamp: PropTypes.number.isRequired,
+  voteScore: PropTypes.number.isRequired,
+};
+
+const mapDispatchToProps = dispatch => ({
+  voteComment: (id, option) => dispatch(voteComment(id, option)),
+});
+
+export default connect(null, mapDispatchToProps)(CommentItem);

@@ -15,6 +15,7 @@ import ButtonUpVote from '../../../Post/components/ButtonUpVote';
 import CommentList from '../../../Post/components/CommentList';
 import EditPostForm from '../Edit';
 import { fetchPost, votePost, deletePost, resetPost } from '../../data/posts/actions';
+import { fetchComments } from '../../data/comments/actions';
 import Loader from '../../../../../../components/Loader';
 import { showDeleteConfirm } from '../../../../../../utils/helpers';
 import './index.css';
@@ -30,6 +31,7 @@ class DetailsPost extends Component {
     const { match } = this.props;
     const { post_id } = match.params;
     this.props.getPost(post_id);
+    this.props.getComments(post_id);
   }
 
   onDeletePost = id => {
@@ -57,7 +59,7 @@ class DetailsPost extends Component {
   }
 
   render() {
-    const { post } = this.props;
+    const { post, comments } = this.props;
 
     if (!post) return <Loader />;
 
@@ -91,7 +93,7 @@ class DetailsPost extends Component {
             <ButtonUpVote onClick={() => this.onVotePost(id, 'upVote')} />
             <ButtonDownVote onClick={() => this.onVotePost(id, 'downVote')} />
           </GroupButton>
-          <CommentList />
+          <CommentList items={comments} />
         </Summary>
         <EditPostForm
           visible={this.state.showEdit}
@@ -109,10 +111,12 @@ DetailsPost.propTypes = {
   votePost: PropTypes.func.isRequired,
   deletePost: PropTypes.func.isRequired,
   resetPost: PropTypes.func.isRequired,
+  getComments: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   post: state.Home.scenes.Post.postSelected,
+  comments: Object.values(state.Home.scenes.Post.data.comments),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -120,6 +124,7 @@ const mapDispatchToProps = dispatch => ({
   votePost: (id, option) => dispatch(votePost(id, option)),
   deletePost: id => dispatch(deletePost(id)),
   resetPost: () => dispatch(resetPost()),
+  getComments: postId => dispatch(fetchComments(postId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsPost);
