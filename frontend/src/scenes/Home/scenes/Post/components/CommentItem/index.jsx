@@ -5,7 +5,8 @@ import { Timeline } from 'antd';
 import CommentHeader from '../../scenes/Comment/components/CommentHeader';
 import CommentContent from '../../scenes/Comment/components/CommentContent';
 import CommentControls from '../../scenes/Comment/components/CommentControls';
-import { voteComment, getComment } from '../../data/comments/actions';
+import { voteComment, getComment, deleteComment } from '../../data/comments/actions';
+import { showDeleteConfirm } from '../../../../../../utils/helpers';
 
 const { Item } = Timeline;
 
@@ -16,6 +17,12 @@ class CommentItem extends Component {
 
   handleEditComment = (id) => {
     this.props.getComment(id);
+  }
+
+  onConfirmationDeleteComment = id => showDeleteConfirm(this.handleDeleteComment, id);
+
+  handleDeleteComment = id => {
+    this.props.deleteComment(id);
   }
 
   render(){
@@ -38,6 +45,7 @@ class CommentItem extends Component {
           id={id}
           onVote={this.handleVoteComment}
           onEdit={this.handleEditComment}
+          onDelete={this.onConfirmationDeleteComment}
         />
       </Item>
     )
@@ -55,6 +63,7 @@ CommentItem.propTypes = {
 const mapDispatchToProps = dispatch => ({
   voteComment: (id, option) => dispatch(voteComment(id, option)),
   getComment: id => dispatch(getComment(id)),
+  deleteComment: id => dispatch(deleteComment(id)),
 });
 
 export default connect(null, mapDispatchToProps)(CommentItem);

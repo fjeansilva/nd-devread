@@ -1,7 +1,7 @@
 /* global localStorage  */
 import fetch from 'cross-fetch';
 
-const api = 'http://192.168.0.15:3001';
+const api = 'http://localhost:3001';
 
 let { token } = localStorage;
 

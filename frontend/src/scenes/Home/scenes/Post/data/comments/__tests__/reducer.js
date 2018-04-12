@@ -1,5 +1,5 @@
 /* global describe, it, expect */
-import { RECEIVE_COMMENTS, VOTE_COMMENT, ADD_COMMENT, EDIT_COMMENT } from '../constants/ActionTypes';
+import { RECEIVE_COMMENTS, VOTE_COMMENT, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../constants/ActionTypes';
 import reducer from '../reducer';
 
 const initialState = {};
@@ -108,6 +108,24 @@ describe('Comment reducer', () => {
         ...state,
         [updatedComment.id]: {
           ...updatedComment,
+        },
+      });
+  });
+
+  it('should handle DELETE_COMMENT', async () => {
+    const state = {
+      [firstComment.id]: {
+        ...firstComment,
+      },
+      [secondComment.id]: {
+        ...secondComment,
+      },
+    };
+
+    expect(reducer(state, { type: DELETE_COMMENT, comment: firstComment }))
+      .toEqual({
+        [secondComment.id]: {
+          ...secondComment,
         },
       });
   });

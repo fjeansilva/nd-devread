@@ -7,12 +7,12 @@ import AvatarUser from '../AvatarUser';
 const { Meta } = Card;
 
 const CardContent = ({
-  id, category, title, body,
+  id, category, title, author,
 }) => (
   <Meta
     avatar={<AvatarUser />}
     title={<Link to={`/${category}/${id}`}>{title}</Link>}
-    description={body.slice(0, 50).concat('...')}
+    description={author}
   />
 );
 
@@ -20,7 +20,7 @@ CardContent.propTypes = {
   id: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
 };
 
 export default CardContent;

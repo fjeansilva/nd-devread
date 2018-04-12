@@ -123,7 +123,7 @@ function edit (token, id, post) {
 function incrementCommentCounter(token, id, count) {
   const data = getData(token)
   if (data[id]) {
-    data[id].commentCount += count
+    data[id].commentCount += count;
   }
 }
 

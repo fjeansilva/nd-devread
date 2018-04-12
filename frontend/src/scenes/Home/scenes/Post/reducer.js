@@ -8,7 +8,7 @@ import {
   EDIT_POST,
   RESET_POST,
 } from './data/posts/constants/ActionTypes';
-import { GET_COMMENT, CLEAR_COMMENT_SELECTED } from './data/comments/constants/ActionTypes';
+import { GET_COMMENT, CLEAR_COMMENT_SELECTED, ADD_COMMENT } from './data/comments/constants/ActionTypes';
 import dataReducer from './data/reducer';
 import orderReducer from './components/OrderBy/reducer';
 

@@ -6,7 +6,6 @@ import {
   THROW_ERROR_POST,
   RECEIVE_POSTS,
   ADD_POST,
-  SELECTED_POST,
   VOTE_POST,
   EDIT_POST,
   DELETE_POST,
@@ -121,7 +120,7 @@ describe('Post actions', () => {
     await actions.votePost(1, 'upVote')(dispatch);
     expect(api.votePost).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
-      [{ type: EDIT_POST, post: payload }],
+      [{ type: VOTE_POST, post: payload }],
     ]);
   });
 

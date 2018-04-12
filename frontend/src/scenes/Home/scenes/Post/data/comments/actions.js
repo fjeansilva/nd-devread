@@ -5,6 +5,7 @@ import {
   EDIT_COMMENT,
   GET_COMMENT,
   CLEAR_COMMENT_SELECTED,
+  DELETE_COMMENT,
 } from '../comments/constants/ActionTypes';
 
 import * as api from './api';
@@ -37,5 +38,11 @@ export const editComment = (id, body) => (dispatch) => {
 export const getComment = id => async (dispatch) => {
   await api.getComment(id)
     .then(comment => dispatch({ type: GET_COMMENT, comment }))
+    .catch(error => console.log(error));
+};
+
+export const deleteComment = id => (dispatch) => {
+  api.deleteComment(id)
+    .then(comment => dispatch({ type: DELETE_COMMENT, comment }))
     .catch(error => console.log(error));
 };

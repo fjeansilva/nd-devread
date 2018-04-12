@@ -10,9 +10,10 @@ const CommentControls = ({
   id,
   onVote,
   onEdit,
+  onDelete,
 }) => (
   <GroupButton>
-    <ButtonDelete />
+    <ButtonDelete onClick={() => onDelete(id)} />
     <ButtonEdit onClick={() => onEdit(id)} />
     <ButtonUpVote onClick={() => onVote(id, 'upVote')} />
     <ButtonDownVote onClick={() => onVote(id, 'downVote')} />
@@ -23,6 +24,7 @@ CommentControls.propTypes = {
   id: PropTypes.string.isRequired,
   onVote: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default CommentControls;

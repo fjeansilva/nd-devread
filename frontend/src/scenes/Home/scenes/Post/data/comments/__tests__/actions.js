@@ -5,6 +5,7 @@ import {
   ADD_COMMENT,
   EDIT_COMMENT,
   VOTE_COMMENT,
+  DELETE_COMMENT,
 } from '../constants/ActionTypes';
 
 import * as api from '../api';
@@ -95,6 +96,16 @@ describe('Comments actions', () => {
     expect(api.getComment).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: GET_COMMENT, comment: firstComment }],
+    ]);
+  });
+
+  it('deleteComment should dispatch a DELETE_COMMENT', async () => {
+    api.setMockCommentRequest(Promise.resolve(firstComment));
+    const dispatch = jest.fn();
+    await actions.deleteComment()(dispatch);
+    expect(api.deleteComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: DELETE_COMMENT, comment: firstComment }],
     ]);
   });
 });

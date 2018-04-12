@@ -2,7 +2,7 @@
 import fetch from 'cross-fetch';
 import uuidv1 from 'uuid/v1';
 
-const api = 'http://192.168.0.15:3001';
+const api = 'http://localhost:3001';
 
 let { token } = localStorage;
 
@@ -83,3 +83,14 @@ export const getComment = id =>
     .then(data => data.json())
     .then(data => data)
     .catch(err => err);
+
+export const deleteComment = (id) => {
+  const params = {
+    method: 'delete',
+    headers,
+  };
+
+  return fetch(`${api}/comments/${id}`, params)
+    .then(data => data.json())
+    .then(data => data);
+};

@@ -86,7 +86,6 @@ class DetailsPost extends Component {
           <PostTitle title={title} />
           <Info
             username={author}
-            totalComments={commentCount}
             totalScore={voteScore}
             description={body}
             date={timestamp}
