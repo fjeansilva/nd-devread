@@ -1,8 +1,8 @@
 import React from 'react';
-import { Icon, Modal, Button } from 'antd';
+import { Icon, Modal } from 'antd';
 import PropTypes from 'prop-types';
 
-const confirm = Modal.confirm;
+const { confirm } = Modal;
 
 function showDeleteConfirm(callback, id) {
   confirm({
@@ -15,13 +15,12 @@ function showDeleteConfirm(callback, id) {
       callback(id);
     },
     onCancel() {
-      console.log('Cancel');
     },
   });
 }
 
 const CoverCard = ({
-  id, commentCount, onDelete, onEdit
+  id, commentCount, onDelete, onEdit,
 }) => (
   <div className="post__card-cover">
     <div>

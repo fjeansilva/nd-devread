@@ -6,8 +6,7 @@ const NotFoundPage = () => (
   <div className="not-found">
     <i className="far fa-frown" />
     <span>Oops!</span>
-    <span>This page</span>
-    <span>not exissts.</span>
+    <span>I'm sorry</span>
     <p>
       <NavLink to="/">
         Back to home

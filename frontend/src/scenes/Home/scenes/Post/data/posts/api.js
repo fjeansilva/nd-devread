@@ -23,6 +23,12 @@ export const getPosts = () =>
     .then(data => data)
     .catch(err => err);
 
+export const getPostsByCategory = category =>
+  fetch(`${api}/${category}/posts`, { headers })
+    .then(data => data.json())
+    .then(data => data)
+    .catch(err => err);
+
 export const addPost = (post) => {
   const defaultValues = {
     id: uuidv1(),

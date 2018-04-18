@@ -6,6 +6,8 @@ import {
   EDIT_COMMENT,
   VOTE_COMMENT,
   DELETE_COMMENT,
+  THROW_ERROR_COMMENT,
+  CLEAR_COMMENT_SELECTED,
 } from '../constants/ActionTypes';
 
 import * as api from '../api';
@@ -47,6 +49,17 @@ describe('Comments actions', () => {
     ]);
   });
 
+  it('fetchComments should dispatch a THROW_ERROR_COMMENT', async () => {
+    const error = 'error message';
+    api.setMockCommentRequest(Promise.resolve());
+    const dispatch = jest.fn();
+    await actions.fetchComments('error')(dispatch);
+    expect(api.getComments).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: THROW_ERROR_COMMENT, error }],
+    ]);
+  });
+
   it('voteComment should dispatch a VOTE_COMMENT', async () => {
     api.setMockCommentRequest(Promise.resolve(firstComment));
     const dispatch = jest.fn();
@@ -58,6 +71,17 @@ describe('Comments actions', () => {
     ]);
   });
 
+  it('voteComment should dispatch a THROW_ERROR_COMMENT', async () => {
+    const error = 'error message';
+    api.setMockCommentRequest(Promise.resolve());
+    const dispatch = jest.fn();
+    await actions.voteComment('error', 1)(dispatch);
+    expect(api.voteComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: THROW_ERROR_COMMENT, error }],
+    ]);
+  });
+
   it('addComment should dispatch a ADD_COMMENT', async () => {
     api.setMockCommentRequest(Promise.resolve(firstComment));
     const dispatch = jest.fn();
@@ -65,6 +89,17 @@ describe('Comments actions', () => {
     expect(api.addComment).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: ADD_COMMENT, comment: firstComment }],
+    ]);
+  });
+
+  it('addComment should dispatch a THROW_ERROR_COMMENT', async () => {
+    const error = 'error message';
+    api.setMockCommentRequest(Promise.resolve());
+    const dispatch = jest.fn();
+    await actions.addComment('error')(dispatch);
+    expect(api.addComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: THROW_ERROR_COMMENT, error }],
     ]);
   });
 
@@ -86,6 +121,18 @@ describe('Comments actions', () => {
     expect(api.editComment).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: EDIT_COMMENT, comment: updatedComment }],
+      [{ type: CLEAR_COMMENT_SELECTED }],
+    ]);
+  });
+
+  it('editComment should dispatch a THROW_ERROR_COMMENT', async () => {
+    const error = 'error message';
+    api.setMockCommentRequest(Promise.resolve());
+    const dispatch = jest.fn();
+    await actions.editComment('error')(dispatch);
+    expect(api.editComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: THROW_ERROR_COMMENT, error }],
     ]);
   });
 
@@ -99,6 +146,17 @@ describe('Comments actions', () => {
     ]);
   });
 
+  it('getComment should dispatch a THROW_ERROR_COMMENT', async () => {
+    const error = 'error message';
+    api.setMockCommentRequest(Promise.resolve());
+    const dispatch = jest.fn();
+    await actions.getComment('error')(dispatch);
+    expect(api.getComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: THROW_ERROR_COMMENT, error }],
+    ]);
+  });
+
   it('deleteComment should dispatch a DELETE_COMMENT', async () => {
     api.setMockCommentRequest(Promise.resolve(firstComment));
     const dispatch = jest.fn();
@@ -106,6 +164,17 @@ describe('Comments actions', () => {
     expect(api.deleteComment).toHaveBeenCalled();
     expect(dispatch.mock.calls).toEqual([
       [{ type: DELETE_COMMENT, comment: firstComment }],
+    ]);
+  });
+
+  it('deleteComment should dispatch a THROW_ERROR_COMMENT', async () => {
+    const error = 'error message';
+    api.setMockCommentRequest(Promise.resolve());
+    const dispatch = jest.fn();
+    await actions.deleteComment('error')(dispatch);
+    expect(api.deleteComment).toHaveBeenCalled();
+    expect(dispatch.mock.calls).toEqual([
+      [{ type: THROW_ERROR_COMMENT, error }],
     ]);
   });
 });

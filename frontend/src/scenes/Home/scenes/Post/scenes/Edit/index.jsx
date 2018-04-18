@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Form, Input, Modal } from 'antd';
 import { connect } from 'react-redux';
 import { editPost, resetPost } from '../../data/posts/actions';
@@ -50,8 +49,7 @@ const ModalEditForm = Form.create(settings)(
 
     render(){
       const {
-        getFieldDecorator,
-        onCancel,
+        getFieldDecorator
       } = this.props.form;
       
       return (

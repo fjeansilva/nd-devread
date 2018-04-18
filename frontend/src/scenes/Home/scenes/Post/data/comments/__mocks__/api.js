@@ -4,14 +4,22 @@ export const setMockCommentRequest = (response) => {
   commentResponse = response;
 };
 
-export const getComments = jest.fn(() => commentResponse);
+function handleResponse(type) {
+  if (type === 'error') {
+    return Promise.reject(new Error('error message').message);
+  }
 
-export const getComment = jest.fn(() => commentResponse);
+  return commentResponse;
+}
 
-export const addComment = jest.fn(() => commentResponse);
+export const getComments = jest.fn(handleResponse);
 
-export const voteComment = jest.fn(() => commentResponse);
+export const getComment = jest.fn(handleResponse);
 
-export const editComment = jest.fn(() => commentResponse);
+export const addComment = jest.fn(handleResponse);
 
-export const deleteComment = jest.fn(() => commentResponse);
+export const voteComment = jest.fn(handleResponse);
+
+export const editComment = jest.fn(handleResponse);
+
+export const deleteComment = jest.fn(handleResponse);

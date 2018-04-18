@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addComment } from '../../../../../data/comments/actions';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 const FormItem = Form.Item;
 const { TextArea } = Input;

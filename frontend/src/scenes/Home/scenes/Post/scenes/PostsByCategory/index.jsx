@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Page from '../../components/Page';
-import MenuBar from './scenes/Post/components/MenuBar';
-import CategoryBar from '../Home/scenes/Category/components/CategoryBar';
-import AsyncPost from './scenes/Post/containers/AsyncPosts';
-import CreatePostForm from './scenes/Post/scenes/Create';
-import EditPostForm from './scenes/Post/scenes/Edit';
-import { addPost } from './scenes/Post/data/posts/actions';
+import Page from '../../../../../../components/Page';
+import MenuBar from '../../../Post/components/MenuBar';
+import CategoryBar from '../../../Category/components/CategoryBar';
+import AsyncPostsByCategory from '../../containers/AsyncPostsByCategory';
+import CreatePostForm from '../Create';
+import EditPostForm from '../Edit';
+import { addPost } from '../../data/posts/actions';
 import './index.css';
 import { notification } from 'antd';
 
@@ -17,7 +17,7 @@ const successNotification = (type) => {
   });
 };
 
-class Home extends Component {
+class PostsByCategory extends Component {
   state = {
     visibleCreateForm: false,
     showEditForm: false,
@@ -59,12 +59,12 @@ class Home extends Component {
 
   render() {
     const { visibleCreateForm } = this.state;
-  
+    
     return (
       <Page>
         <MenuBar handleClick={this.handleClick} />
         <CategoryBar />
-        <AsyncPost handleEdit={this.handleModal} />
+        <AsyncPostsByCategory handleEdit={this.handleModal} {...this.props} />
         <CreatePostForm
           visible={visibleCreateForm}
           onCancel={this.onVisibleCreateForm}
@@ -86,4 +86,4 @@ const mapDispatchToProps = dispatch => ({
   addPost: values => dispatch(addPost(values)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsByCategory);

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CreateForm from '../Create/components/Form';
-import { Button } from 'antd';
 import { addPost } from '../../data/posts/actions';
 import './index.css';
 

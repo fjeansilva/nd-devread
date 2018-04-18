@@ -7,8 +7,9 @@ import {
   VOTE_POST,
   EDIT_POST,
   RESET_POST,
+  NOT_FOUND_POST,
 } from './data/posts/constants/ActionTypes';
-import { GET_COMMENT, CLEAR_COMMENT_SELECTED, ADD_COMMENT } from './data/comments/constants/ActionTypes';
+import { GET_COMMENT, CLEAR_COMMENT_SELECTED } from './data/comments/constants/ActionTypes';
 import dataReducer from './data/reducer';
 import orderReducer from './components/OrderBy/reducer';
 
@@ -78,10 +79,16 @@ export default function reducer(state = initialState, action) {
         data: newData,
       };
     }
+    case NOT_FOUND_POST:
+      return {
+        ...state,
+        notFound: true,
+      };
     case SELECTED_POST:
       return {
         ...state,
         postSelected: action.post,
+        notFound: false,
       };
     case RESET_POST:
       return {

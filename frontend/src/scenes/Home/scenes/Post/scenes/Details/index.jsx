@@ -13,6 +13,7 @@ import ButtonEdit from '../../../Post/components/ButtonEdit';
 import ButtonDownVote from '../../../Post/components/ButtonDownVote';
 import ButtonUpVote from '../../../Post/components/ButtonUpVote';
 import CommentList from '../../../Post/components/CommentList';
+import NotFoundPage from '../../../../../../components/NotFoundPage';
 import EditPostForm from '../Edit';
 import { fetchPost, votePost, deletePost, resetPost } from '../../data/posts/actions';
 import { fetchComments } from '../../data/comments/actions';
@@ -63,7 +64,9 @@ class DetailsPost extends Component {
   }
 
   render() {
-    const { post, comments } = this.props;
+    const { post, comments, notFound } = this.props;
+
+    if(notFound) return <NotFoundPage />
 
     if (!post) return <Loader />;
 
@@ -72,7 +75,6 @@ class DetailsPost extends Component {
       title,
       category,
       author,
-      commentCount,
       voteScore,
       body,
       timestamp,
@@ -115,10 +117,12 @@ DetailsPost.propTypes = {
   deletePost: PropTypes.func.isRequired,
   resetPost: PropTypes.func.isRequired,
   getComments: PropTypes.func.isRequired,
+  notFound: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   post: state.Home.scenes.Post.postSelected,
+  notFound: state.Home.scenes.Post.notFound,
   comments: orderComments(state.Home.scenes.Post.data.comments),
 });
 

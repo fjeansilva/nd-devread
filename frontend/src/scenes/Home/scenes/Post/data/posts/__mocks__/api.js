@@ -4,14 +4,24 @@ export const setMockPostRequest = (response) => {
   postResponse = response;
 };
 
-export const getPosts = jest.fn(() => postResponse);
+function handleResponse(type) {
+  if (type === 'error') {
+    return Promise.reject(new Error('error message').message);
+  }
 
-export const getPost = jest.fn(() => postResponse);
+  return postResponse;
+}
 
-export const addPost = jest.fn(() => postResponse);
+export const getPosts = jest.fn(handleResponse);
 
-export const votePost = jest.fn(() => postResponse);
+export const getPostsByCategory = jest.fn(handleResponse);
 
-export const editPost = jest.fn(() => postResponse);
+export const getPost = jest.fn(handleResponse);
 
-export const deletePost = jest.fn(() => postResponse);
+export const addPost = jest.fn(handleResponse);
+
+export const votePost = jest.fn(handleResponse);
+
+export const editPost = jest.fn(handleResponse);
+
+export const deletePost = jest.fn(handleResponse);
